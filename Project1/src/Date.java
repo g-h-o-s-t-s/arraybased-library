@@ -16,7 +16,30 @@ public class Date
     }
 
     //TO-DO: add methods where necessary
+    public void setYear(int year){
+        this.year = year;
+    }
+    
+    public void setMonth(int month){
+        this.month = month;
+    }
+    
+    public void setDay(int day){
+        this.day = day;
+    }
 
+    public void getYear(){
+        return this.year;
+    }
+    
+    public void getMonth(){
+        return this.month;
+    }
+    
+    public void getDay(){
+        return this.day;
+    }
+    
     //boolean return type?
     public isValid()
     {

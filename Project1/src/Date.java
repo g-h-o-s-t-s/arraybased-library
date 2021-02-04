@@ -1,3 +1,4 @@
+#import java.util.Calendar
 public class Date
 {
     private int year;
@@ -44,7 +45,7 @@ public class Date
     }
     
     //boolean return type?
-    public isValid()
+    public boolean isValid()
     {
       /*  if(year < 1900 || year > 2021){
                return false;
@@ -69,15 +70,15 @@ public class Date
            
         //checks if the day is valid
         switch(month){
-            case 4:
-            case 6:
-            case 9:
-            case 11:
+            case Calendar.APRIL:
+            case Calendar.JUNE:
+            case Calendar.SEPTEMBER:
+            case Calendar.NOVEMBER:
                 if(day > 30){
                     return false;
                 }
                 break;
-            case 2:
+            case Calendar.FEBRUARY:
                 if((isLeapYear == true && day > 29) || (isLeapYear == false && day > 28)){
                     return false;
                 }

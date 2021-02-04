@@ -3,6 +3,9 @@ public class Date
     private int year;
     private int month;
     private int day;
+   public static final int QUADRENNIAL = 4;
+   public static final int CENTURY = 100;
+   public static final int QUATERCENTENNIAL = 400;
 
     public Date(String date) //taking mm/dd/yyyy and create a Date object
     {
@@ -50,9 +53,9 @@ public class Date
       //check for leap year
       /*
         boolean isLeapYear;
-        if(year%4 == 0){
-            if(year%100 == 0){
-                if(year%400 == 0){
+        if(year%QUADRENNIAL == 0){
+            if(year%CENTURY == 0){
+                if(year%QUATERCENTENNIAL == 0){
                     isLeapYear = true;
                 }else{
                     isLeapYear = false;

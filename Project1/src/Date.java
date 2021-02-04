@@ -46,10 +46,47 @@ public class Date
       /*  if(year < 1900 || year > 2021){
                return false;
       */
-        
+      
       //check for leap year
       /*
-        if(
+        boolean isLeapYear;
+        if(year%4 == 0){
+            if(year%100 == 0){
+                if(year%400 == 0){
+                    isLeapYear = true;
+                }else{
+                    isLeapYear = false;
+                }
+            }else{
+                isLeapYear = true;
+            }
+        }else{
+            isLeapYear = false;
+        }
+           
+        //checks if the day is valid
+        switch(month){
+            case 4:
+            case 6:
+            case 9:
+            case 11:
+                if(day > 30){
+                    return false;
+                }
+                break;
+            case 2:
+                if((isLeapYear == true && day > 29) || (isLeapYear == false && day > 28)){
+                    return false;
+                }
+                break;
+            default: //the months with 31 days
+                if(day > 31){
+                    return false;
+                }
+                break;
+           }
+        
+        
       */
     }
 }

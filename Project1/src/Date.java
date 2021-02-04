@@ -49,12 +49,11 @@ public class Date
     //boolean return type?
     public boolean isValid()
     {
-      /*  if(year < 1900 || year > 2021){
+        if(year < 1900 || year > 2021){
                return false;
-      */
-      
+        }
+        
       //check for leap year
-      /*
         boolean isLeapYear;
         if(year%QUADRENNIAL == 0){
             if(year%CENTURY == 0){
@@ -70,7 +69,7 @@ public class Date
             isLeapYear = false;
         }
            
-        //checks if the day is valid
+        //checks if the day is valid for each month
         switch(month){
             case Calendar.APRIL:
             case Calendar.JUNE:

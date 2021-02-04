@@ -27,13 +27,11 @@ public class Book
     }
 
     /**
-    * Determines if two Books have the same serial number.
-    * @param
     * @return String literal of Book field values
     */
     @Override
     public String toString()
     {
-
+        return "Book#" + number + "::" + name + "::" + datePublished + "::is available.";
     }
 }

@@ -16,7 +16,9 @@ public class Date
     }
     public Date() //return today’s date
     {
-
+        year = 0;
+        month = 0;
+        day = 0;
     }
 
     //TO-DO: add methods where necessary

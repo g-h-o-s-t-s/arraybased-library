@@ -82,10 +82,7 @@ public class Library
             return false;
 
         //attempt to check out book
-        if (!book.tryCheckOut())
-            return false;
-
-        return true;
+        return book.tryCheckOut();
     }
 
     /**
@@ -100,10 +97,7 @@ public class Library
             return false;
 
         //attempt to return book
-        if (!book.tryReturns())
-            return false;
-
-        return true;
+        return book.tryReturns();
 
     }
 
@@ -112,9 +106,9 @@ public class Library
      */
     public void print()
     {
-        for (Book i:books)
+        for (Book book:books)
         {
-            System.out.println(book[i].toString());
+            System.out.println(book.toString());
         }
     }
 

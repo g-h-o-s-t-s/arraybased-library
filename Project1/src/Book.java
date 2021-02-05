@@ -7,6 +7,7 @@
  */
 public class Book
 {
+    //object fields
     private String number; //5-digit serial number unique to the book
     private String name;
     private boolean checkedOut;
@@ -30,6 +31,38 @@ public class Book
     public void setBookNum(String newNum)
     {
         this.number = newNum;
+    }
+
+    /**
+     * Attempts to check out this Book object.
+     * If the book is already checked out, tryCheckOut() fails and we cannot
+     * check out the book. If it is available, the book is now checked out,
+     * and tryCheckOut() succeeds.
+     * @return false if this.checkedOut is initially true, true otherwise
+     */
+    public boolean tryCheckOut()
+    {
+        if (this.checkedOut)
+            return false;
+        else
+            this.checkedOut = true;
+        return true;
+    }
+
+    /**
+     * Attempts to return this Book object.
+     * If the book is already available, tryReturns() fails and we cannot
+     * return the book. If it is checked out, the book is now returned,
+     * and tryReturns() succeeds.
+     * @return false if this.checkedOut is initially false, true otherwise
+     */
+    public boolean tryReturns()
+    {
+        if (!this.checkedOut)
+            return false;
+        else
+            this.checkedOut = false;
+        return true;
     }
 
     /**

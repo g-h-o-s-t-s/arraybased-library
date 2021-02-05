@@ -188,7 +188,8 @@ public class Date
     {
         System.out.println("TESTBED MAIN - DATE() CLASS" +
                 "\n---------------------------");
-        //Test 1 - Is Today's Date Valid?
+
+        //Test 1 - Is Today's Date Valid? (expected true)
         Calendar rightNow = Calendar.getInstance();
         String str1 = String.format("%d/%d/%d",
                 rightNow.get(Calendar.MONTH) + 1,
@@ -199,56 +200,56 @@ public class Date
         boolean test1 = date1.isValid();
         System.out.println("Test 1 returned " + test1 + ".");
 
-        //Test 2 - Is 1/1/1900 Valid?
+        //Test 2 - Is 1/1/1900 Valid? (expected true)
         String str2 = "1/1/1900";
         Date date2 = new Date(str2);
         System.out.println("Now testing \"" + date2.toString() + "\".");
         boolean test2 = date2.isValid();
         System.out.println("Test 2 returned " + test2 + ".");
 
-        //Test 3 - Is 1/31/1979 Valid?
+        //Test 3 - Is 1/31/1979 Valid? (expected true)
         String str3 = "1/31/1979";
         Date date3 = new Date(str3);
         System.out.println("Now testing \"" + date3.toString() + "\".");
         boolean test3 = date3.isValid();
         System.out.println("Test 3 returned " + test3 + ".");
 
-        //Test 4 - Is 02/28/1999 Valid?
+        //Test 4 - Is 02/28/1999 Valid? (expected true)
         String str4 = "02/28/1999";
         Date date4 = new Date(str4);
         System.out.println("Now testing \"" + date4.toString() + "\".");
         boolean test4 = date4.isValid();
         System.out.println("Test 4 returned " + test4 + ".");
 
-        //Test 5 - Is 02/29/1999 Valid?
+        //Test 5 - Is 02/29/1999 Valid? (expected false)
         String str5 = "02/29/1999";
         Date date5 = new Date(str5);
         System.out.println("Now testing \"" + date5.toString() + "\".");
         boolean test5 = date5.isValid();
         System.out.println("Test 5 returned " + test5 + ".");
 
-        //Test 6 - Is 02/29/2000 Valid?
+        //Test 6 - Is 02/29/2000 Valid? (expected true)
         String str6 = "02/29/2000";
         Date date6 = new Date(str6);
         System.out.println("Now testing \"" + date6.toString() + "\".");
         boolean test6 = date6.isValid();
         System.out.println("Test 6 returned " + test6 + ".");
 
-        //Test 7 - Is 02/30/2000 Valid?
+        //Test 7 - Is 02/30/2000 Valid? (expected false)
         String str7 = "02/30/2000";
         Date date7 = new Date(str7);
         System.out.println("Now testing \"" + date7.toString() + "\".");
         boolean test7 = date7.isValid();
         System.out.println("Test 7 returned " + test7 + ".");
 
-        //Test 8 - Is 09/31/2012 Valid?
+        //Test 8 - Is 09/31/2012 Valid? (expected false)
         String str8 = "09/31/2012";
         Date date8 = new Date(str8);
         System.out.println("Now testing \"" + date8.toString() + "\".");
         boolean test8 = date8.isValid();
         System.out.println("Test 8 returned " + test8 + ".");
 
-        //Test 9 - Is Tomorrow's Date Valid?
+        //Test 9 - Is Tomorrow's Date Valid? (expected false)
         String str9 = String.format("%d/%d/%d",
                 rightNow.get(Calendar.MONTH) + 1,
                 rightNow.get(Calendar.DAY_OF_MONTH) + 1,
@@ -258,7 +259,7 @@ public class Date
         boolean test9 = date9.isValid();
         System.out.println("Test 9 returned " + test9 + ".");
 
-        //Test 10 - Is Next Year's Date Valid?
+        //Test 10 - Is Next Year's Date Valid? (expected false)
         String str10 = String.format("%d/%d/%d",
                 rightNow.get(Calendar.MONTH) + 1,
                 rightNow.get(Calendar.DAY_OF_MONTH),

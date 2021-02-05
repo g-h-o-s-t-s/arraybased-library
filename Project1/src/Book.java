@@ -24,7 +24,7 @@ public class Book
     }
 
     /**
-     * Determines if two Books have the same serial number.
+     * Updates number field for this Book.
      * @param newNum String, will be invoking object's new serial number
      */
     public void setBookNum(String newNum)

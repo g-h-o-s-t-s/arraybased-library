@@ -5,6 +5,7 @@
  * a String literal describing their data field contents.
  @author Michael Choe, Sagnik Mukherjee
  */
+@SuppressWarnings("WeakerAccess")
 public class Book implements Comparable<Book>
 {
     //object fields
@@ -14,11 +15,24 @@ public class Book implements Comparable<Book>
     private Date datePublished;
 
     /*
+     * Parameterized constructor.
+     * Splits passed string and updates Date fields accordingly.
+     * @param date String literal used to update Date field values
+     */
+    public Book(int num, String title, String date)
+    {
+        number = "" + num;
+        name = title;
+        checkedOut = false;
+        datePublished = new Date(date);
+    }
+
+    /*
      * Default constructor.
      */
     public Book()
     {
-        number = "10001";
+        number = "";
         name = "";
         checkedOut = false;
         datePublished = new Date();

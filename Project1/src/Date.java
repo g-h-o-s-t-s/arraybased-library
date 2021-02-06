@@ -8,6 +8,7 @@ import java.util.Calendar;
  * Testbed main used to ensure isValid() is exhaustive as possible.
  @author Michael Choe, Sagnik Mukherjee
  */
+@SuppressWarnings("WeakerAccess")
 public class Date implements Comparable<Date>
 {
     //object fields
@@ -95,16 +96,12 @@ public class Date implements Comparable<Date>
      */
     private boolean isInFuture(int month, int day, int year)
     {
-        Calendar current = Calendar.getInstance();
+        Date curr = new Date();
 
-        int currMonth = current.get(Calendar.MONTH) + 1;
-        int currDay = current.get(Calendar.DAY_OF_MONTH);
-        int currYear = current.get(Calendar.YEAR);
-
-        return ((year > currYear)
-            || (year == currYear && month > currMonth)
-            || (year == currYear && month == currMonth
-                && day > currDay));
+        return ((year > curr.year)
+            || (year == curr.year && month > curr.month)
+            || (year == curr.year && month == curr.month
+                && day > curr.day));
     }
 
     /**

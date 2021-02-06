@@ -5,6 +5,7 @@
  * to/from the current Library instance, or print out the list of Books.
  @author Michael Choe, Sagnik Mukherjee
  */
+@SuppressWarnings("ManualArrayCopy")
 public class Library
 {
     //TO-DO: implement all methods, add helper methods as needed
@@ -14,14 +15,14 @@ public class Library
     private int numBooks; // the number of books currently in the bag
 
     //static constants
-    private static final int DEFAULTSIZE = 20;
+    private static final int DEFAULT = 20;
 
     /*
      * Default constructor.
      */
     public Library()
     {
-        books = new Book[DEFAULTSIZE];
+        books = new Book[DEFAULT];
         numBooks = books.length;
     }
 
@@ -45,12 +46,11 @@ public class Library
      */
     private void grow()
     {
-        Book[] temp = new Book[numBooks + 4];
+        Book[] temp = new Book[books.length + 4];
         for (int i = 0; i < numBooks; i++)
             temp[i] = books[i];
 
         books = temp;
-        numBooks += 4;
     }
 
     /**
@@ -66,7 +66,7 @@ public class Library
                 available = i;
 
         //bag is full, need to call grow()
-        if (available + 1 > numBooks)
+        if (available + 1 > books.length)
             grow();
 
         books[available] = book;
@@ -81,11 +81,20 @@ public class Library
      */
     public boolean remove(Book book)
     {
-        int found = find(book);
-        if (found == -1)
+        int removeThis = find(book);
+        if (removeThis == -1)
             return false;
 
-        //TO-DO: remove book
+        Book[] temp = new Book[books.length - 1];
+
+        //add all Books besides the removed Book object to temp
+        for (int i = 0; i < numBooks; i++)
+        {
+            if (!(Integer.parseInt(books[i].getNumber()) == removeThis))
+                temp[i] = books[i];
+        }
+
+        books = temp;
         return true;
     }
 
@@ -136,7 +145,7 @@ public class Library
     public void printByDate()
     {
         //using temp array, order of original books[] is preserved
-        Book[] temp = new Book[numBooks];
+        Book[] temp = new Book[books.length];
         for (int i = 0; i < numBooks; i++)
             temp[i] = books[i];
 
@@ -176,7 +185,7 @@ public class Library
     public void printByNumber()
     {
         //using temp array, order of original books[] is preserved
-        Book[] temp = new Book[numBooks];
+        Book[] temp = new Book[books.length];
         for (int i = 0; i < numBooks; i++)
             temp[i] = books[i];
 

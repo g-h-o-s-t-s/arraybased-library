@@ -5,7 +5,7 @@
  * a String literal describing their data field contents.
  @author Michael Choe, Sagnik Mukherjee
  */
-public class Book
+public class Book implements Comparable<Book>
 {
     //object fields
     private String number; //5-digit serial number unique to the book
@@ -31,6 +31,24 @@ public class Book
     public void setBookNum(String newNum)
     {
         this.number = newNum;
+    }
+
+    /**
+     * Getter, returns number field for this Book.
+     * @return String literal containing this.book.number value
+     */
+    public String getNumber()
+    {
+        return number;
+    }
+
+    /**
+     * Getter, returns datePublished field for this Book.
+     * @return String literal containing this.book.datePublished value
+     */
+    public Date getDatePublished()
+    {
+        return datePublished;
     }
 
     /**
@@ -80,6 +98,19 @@ public class Book
 
         Book that = (Book) obj;
         return this.number.equals(that.number);
+    }
+
+    /**
+     * Compare passed Book.number (that) with invoking Book.number (this).
+     * @param that Book to be compared to by invoking object
+     * @return -1 if this < that, 1 if this > that, 0 if objects are equal
+     */
+    public int compareTo(Book that)
+    {
+        int thisNumber = Integer.parseInt(this.number);
+        int thatNumber = Integer.parseInt(that.getNumber());
+
+        return Integer.compare(thisNumber, thatNumber);
     }
 
     /**

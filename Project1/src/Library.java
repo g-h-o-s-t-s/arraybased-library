@@ -14,14 +14,14 @@ public class Library
     private int numBooks; // the number of books currently in the bag
 
     //static constants
-    private static final int MAXSIZE = 10;
+    private static final int DEFAULTSIZE = 20;
 
     /*
      * Default constructor.
      */
     public Library()
     {
-        books = new Book[MAXSIZE];
+        books = new Book[DEFAULTSIZE];
         numBooks = books.length;
     }
 
@@ -33,6 +33,10 @@ public class Library
      */
     private int find(Book book)
     {
+        for (Book curr:books)
+            if (curr.equals(book))
+                return Integer.parseInt(curr.getNumber());
+
         return -1;
     }
 
@@ -41,16 +45,31 @@ public class Library
      */
     private void grow()
     {
+        Book[] temp = new Book[numBooks + 4];
+        for (int i = 0; i < numBooks; i++)
+            temp[i] = books[i];
 
+        books = temp;
+        numBooks += 4;
     }
 
     /**
-     * Adds book to the end of Library.books[].
-     * @param book Book to be appended to books[].
+     * Adds book in available empty slot in Library.books[].
+     * @param book Book to be inserted in books[].
      */
     public void add(Book book)
     {
+        //look for first available empty slot in books[]
+        int available = numBooks;
+        for (int i = 0; i < numBooks; i++)
+            if (books[i] == null)
+                available = i;
 
+        //bag is full, need to call grow()
+        if (available + 1 > numBooks)
+            grow();
+
+        books[available] = book;
     }
 
     /**
@@ -66,7 +85,7 @@ public class Library
         if (found == -1)
             return false;
 
-        //remove book
+        //TO-DO: remove book
         return true;
     }
 
@@ -98,7 +117,6 @@ public class Library
 
         //attempt to return book
         return book.tryReturns();
-
     }
 
     /**
@@ -117,7 +135,39 @@ public class Library
      */
     public void printByDate()
     {
+        //using temp array, order of original books[] is preserved
+        Book[] temp = new Book[numBooks];
+        for (int i = 0; i < numBooks; i++)
+            temp[i] = books[i];
 
+        sortByDate(temp);
+
+        for (Book book:temp)
+            System.out.println(book.toString());
+    }
+
+    /**
+     * Helper method for printByDate().
+     * Sorts array in ascending order of publication dates.
+     * @param books array containing list of books
+     *
+     */
+    private void sortByDate(Book[] books)
+    {
+        //insertion sort, shift larger elements to the right as needed
+        for (int i = 1; i < numBooks; i++)
+        {
+            Book key = books[i];
+            int j = i - 1;
+
+            while (j >= 0 && (books[j].getDatePublished()
+                    .compareTo(key.getDatePublished()) > 0))
+            {
+                books[j+1] = books[j];
+                j = j - 1;
+            }
+            books[j+1] = key;
+        }
     }
 
     /**
@@ -125,6 +175,38 @@ public class Library
      */
     public void printByNumber()
     {
+        //using temp array, order of original books[] is preserved
+        Book[] temp = new Book[numBooks];
+        for (int i = 0; i < numBooks; i++)
+            temp[i] = books[i];
 
+        sortByNumber(temp);
+
+        for (Book book:temp)
+            System.out.println(book.toString());
+    }
+
+    /**
+     * Helper method for printByNumber().
+     * Sorts array in ascending order of serial number.
+     * @param books array containing list of books
+     *
+     */
+    private void sortByNumber(Book[] books)
+    {
+        for (int i = 1; i < numBooks; i++)
+        {
+            Book key = books[i];
+            int j = i - 1;
+
+            while (j >= 0
+                    && Integer.parseInt(books[j].getNumber())
+                    > Integer.parseInt(key.getNumber()))
+            {
+                books[j+1] = books[j];
+                j = j - 1;
+            }
+            books[j+1] = key;
+        }
     }
 }

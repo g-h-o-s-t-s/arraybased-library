@@ -8,7 +8,7 @@ import java.util.Calendar;
  * Testbed main used to ensure isValid() is exhaustive as possible.
  @author Michael Choe, Sagnik Mukherjee
  */
-public class Date
+public class Date implements Comparable<Date>
 {
     //object fields
     private int month;
@@ -33,9 +33,9 @@ public class Date
     public Date(String date) //taking mm/dd/yyyy and create a Date object
     {
         String[] fields = date.split("/");
-        month = Integer.valueOf(fields[0]);
-        day = Integer.valueOf(fields[1]);
-        year = Integer.valueOf(fields[2]);
+        month = Integer.parseInt(fields[0]);
+        day = Integer.parseInt(fields[1]);
+        year = Integer.parseInt(fields[2]);
     }
 
     /*
@@ -166,6 +166,27 @@ public class Date
                 break;
         }
         return true;
+    }
+
+    /**
+     * Compare passed Date (that) with invoking Date object (this).
+     * @param that Date to be compared to by invoking object
+     * @return -1 if this < that, 1 if this > that, 0 if objects are equal
+     */
+    public int compareTo(Date that)
+    {
+        if ((this.year < that.year)
+                || (this.year == that.year && this.month < that.month)
+                || (this.year == that.year && this.month == that.month
+                && this.day < that.day))
+            return -1;
+        else if ((this.year > that.year)
+                || (/*this.year == that.year && */this.month > that.month)
+                || (/*this.year == that.year && this.month == that.month &&*/
+                this.day > that.day))
+            return 1;
+
+        return 0;
     }
 
     /**

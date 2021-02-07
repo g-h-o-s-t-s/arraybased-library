@@ -26,7 +26,7 @@ public class Date implements Comparable<Date>
     private static final int FEBDAYS = 28;
     private static final int DEFAULTMAXDAYS = 31;
 
-    /*
+    /**
      * Parameterized constructor.
      * Splits passed string and updates Date fields accordingly.
      * @param date String literal used to update Date field values
@@ -39,7 +39,7 @@ public class Date implements Comparable<Date>
         year = Integer.parseInt(fields[2]);
     }
 
-    /*
+    /**
      * Default constructor.
      * Uses Calendar class to get current date, and
      * assigns values to fields accordingly.

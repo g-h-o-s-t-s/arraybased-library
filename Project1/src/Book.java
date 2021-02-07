@@ -14,10 +14,11 @@ public class Book implements Comparable<Book>
     private boolean checkedOut;
     private Date datePublished;
 
-    /*
+    /**
      * Parameterized constructor.
-     * Splits passed string and updates Date fields accordingly.
-     * @param date String literal used to update Date field values
+     * @param num int, will hold serial number
+     * @param title String, title of Book object
+     * @param date String, date used for parameterized Date() constructor
      */
     public Book(int num, String title, String date)
     {
@@ -27,7 +28,19 @@ public class Book implements Comparable<Book>
         datePublished = new Date(date);
     }
 
-    /*
+    /**
+     * Parameterized constructor, takes only the serial number.
+     * @param num int, will hold serial number
+     */
+    public Book(int num)
+    {
+        number = "" + num;
+        name = "";
+        checkedOut = false;
+        datePublished = new Date();
+    }
+
+    /**
      * Default constructor.
      */
     public Book()
@@ -36,15 +49,6 @@ public class Book implements Comparable<Book>
         name = "";
         checkedOut = false;
         datePublished = new Date();
-    }
-
-    /**
-     * Updates number field for this Book.
-     * @param newNum String, will be invoking object's new serial number
-     */
-    public void setBookNum(String newNum)
-    {
-        this.number = newNum;
     }
 
     /**

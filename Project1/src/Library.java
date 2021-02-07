@@ -5,11 +5,9 @@
  * to/from the current Library instance, or print out the list of Books.
  @author Michael Choe, Sagnik Mukherjee
  */
-@SuppressWarnings("ManualArrayCopy")
+@SuppressWarnings({"ManualArrayCopy", "WeakerAccess"})
 public class Library
 {
-    //TO-DO: implement all methods, add helper methods as needed
-
     //object fields
     private Book[] books; // array-based implementation of the bag data structure
     private int numBooks; // the number of books currently in the bag
@@ -17,13 +15,22 @@ public class Library
     //static constants
     private static final int DEFAULT = 20;
 
-    /*
+    /**
      * Default constructor.
      */
     public Library()
     {
         books = new Book[DEFAULT];
         numBooks = books.length;
+    }
+
+    /**
+     * Method to determine if this Library is empty.
+     * @return true if this.books is empty, false otherwise
+     */
+    public boolean isEmpty()
+    {
+        return (this.numBooks == 0);
     }
 
     /**
@@ -70,6 +77,7 @@ public class Library
             grow();
 
         books[available] = book;
+        numBooks++;
     }
 
     /**
@@ -95,6 +103,7 @@ public class Library
         }
 
         books = temp;
+        numBooks--;
         return true;
     }
 

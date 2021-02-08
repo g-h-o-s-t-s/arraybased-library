@@ -9,19 +9,19 @@
 public class Library
 {
     //object fields
-    private Book[] books; // array-based implementation of the bag data structure
-    private int numBooks; // the number of books currently in the bag
+    private Book[] books;
+    private int numBooks;
 
     //static constants
-    private static final int DEFAULT = 20;
+    private static final int DEFAULT = 1;
 
     /**
      * Default constructor.
      */
     public Library()
     {
-        books = new Book[DEFAULT];
-        numBooks = books.length;
+        books = new Book[1];
+        numBooks = 0;
     }
 
     /**
@@ -42,7 +42,7 @@ public class Library
     private int find(Book book)
     {
         for (Book curr:books)
-            if (curr.equals(book))
+            if ((curr != null) && curr.equals(book))
                 return Integer.parseInt(curr.getNumber());
 
         return -1;
@@ -66,18 +66,15 @@ public class Library
      */
     public void add(Book book)
     {
-        //look for first available empty slot in books[]
-        int available = numBooks;
-        for (int i = 0; i < numBooks; i++)
-            if (books[i] == null)
-                available = i;
+        if (numBooks < books.length && book != null)
+        {
+            books[numBooks] = book;
+            numBooks++;
+        }
 
         //bag is full, need to call grow()
-        if (available + 1 > books.length)
+        if (numBooks >= books.length)
             grow();
-
-        books[available] = book;
-        numBooks++;
     }
 
     /**
@@ -98,7 +95,8 @@ public class Library
         //add all Books besides the removed Book object to temp
         for (int i = 0; i < numBooks; i++)
         {
-            if (!(Integer.parseInt(books[i].getNumber()) == removeThis))
+            if ((books[i] != null) &&
+                    !(Integer.parseInt(books[i].getNumber()) == removeThis))
                 temp[i] = books[i];
         }
 
@@ -143,9 +141,8 @@ public class Library
     public void print()
     {
         for (Book book:books)
-        {
-            System.out.println(book.toString());
-        }
+            if (book != null)
+                System.out.println(book.toString());
     }
 
     /**
@@ -161,7 +158,8 @@ public class Library
         sortByDate(temp);
 
         for (Book book:temp)
-            System.out.println(book.toString());
+            if (book != null)
+                System.out.println(book.toString());
     }
 
     /**
@@ -201,7 +199,8 @@ public class Library
         sortByNumber(temp);
 
         for (Book book:temp)
-            System.out.println(book.toString());
+            if (book != null)
+                System.out.println(book.toString());
     }
 
     /**

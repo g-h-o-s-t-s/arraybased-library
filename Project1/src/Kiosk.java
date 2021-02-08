@@ -31,7 +31,6 @@ public class Kiosk
         while (loop && scn.hasNextLine())
         {
             input = scn.nextLine();
-            print(input);
             if (input.equals("Q"))
             {
                 loop = false;
@@ -39,9 +38,6 @@ public class Kiosk
             }
 
             inputs = input.split(",");
-            for (String str:inputs)
-                print(str);
-
             String command = inputs[0];
             //TO-DO: break cases off into helper methods
             //TO-DO: commands are not thorough and throw various exceptions,
@@ -79,10 +75,7 @@ public class Kiosk
                         boolean removed = library.remove(key);
 
                         if (removed)
-                        {
                             print("Book# " + number + " removed.");
-                            bookCounter--;
-                        }
                         else
                             print("Unable to remove, the library " +
                                     "does not have this book.");

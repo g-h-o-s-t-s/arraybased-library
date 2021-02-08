@@ -6,6 +6,10 @@
       <w>defaultmaxdays</w>
       <w>febdays</w>
       <w>febdaysleap</w>
+      <w>isempty</w>
+      <w>printall</w>
+      <w>printdate</w>
+      <w>printnum</w>
       <w>quartercentennial</w>
       <w>threeinputs</w>
       <w>twoinputs</w>

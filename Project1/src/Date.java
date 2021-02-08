@@ -47,7 +47,7 @@ public class Date implements Comparable<Date>
     /**
      * Determines if Date contents follow the Gregorian Calendar.
      * The year may not be less than 1900, and the day must be
-     * <= 28, 29, 30, or 31, depending on the month and
+     * less than or equal to 28, 29, 30, or 31, depending on the month and
      * whether or not the Date contains a leap year, to be valid.
      * If the date could not be found on a printed calendar for
      * the given year, or is in the future, it is not a valid date.
@@ -158,7 +158,7 @@ public class Date implements Comparable<Date>
     /**
      * Compare passed Date (that) with invoking Date object (this).
      * @param that Date to be compared to by invoking object
-     * @return -1 if this < that, 1 if this > that, 0 if objects are equal
+     * @return -1 if this is less, 1 if this is greater, 0 if equal
      */
     public int compareTo(Date that)
     {

@@ -121,7 +121,7 @@ public class Book implements Comparable<Book>
     /**
      * Compare passed Book.number (that) with invoking Book.number (this).
      * @param that Book to be compared to by invoking object
-     * @return -1 if this < that, 1 if this > that, 0 if objects are equal
+     * @return -1 if this is less, 1 if this is greater, 0 if equal
      */
     public int compareTo(Book that)
     {

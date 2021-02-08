@@ -33,6 +33,21 @@ public class Consts
     //"R", "O", and "I" would have two substrings for their input lines.
     public static final int THREEINPUTS = 3;
     public static final int TWOINPUTS = 2;
+    //Output messages/String literal constant values used in Kiosk.
+    public static final String STARTUP = "Library Kiosk running.";
+    public static final String QUIT = "Q";
+    public static final String DELIMITER = ",";
+    public static final String ADD = "A";
+    public static final String REMOVE = "R";
+    public static final String CHECKOUT = "O";
+    public static final String RETURN = "I";
+    public static final String PRINTALL = "PA";
+    public static final String ISEMPTY = "Library catalog is empty!";
+    public static final String PRINTDATE = "PD";
+    public static final String PRINTNUM = "PN";
+    public static final String INVALID = "Invalid command!";
+    public static final String SHUTDOWN = "Kiosk session ended.";
+
 
     /**
      * Constructor prevents other classes from instantiating objects of

@@ -15,7 +15,7 @@ public class Kiosk
      */
     public void run()
     {
-        print("Library Kiosk running.");
+        print(Consts.STARTUP);
         Library library = new Library();
         Scanner scn = new Scanner(System.in);
         String input;
@@ -26,64 +26,62 @@ public class Kiosk
         while (loop && scn.hasNextLine())
         {
             input = scn.nextLine();
-            if (input.equals("Q"))
+            if (input.equals(Consts.QUIT))
             {
                 loop = false;
                 continue;
             }
 
-            inputs = input.split(",");
+            inputs = input.split(Consts.DELIMITER);
             String command = inputs[0];
-            //TO-DO: break cases off into helper methods
             //TO-DO: commands are not thorough and throw various exceptions,
             // so far only adding works as intended
             switch (command)
             {
-                case "A":
+                case Consts.ADD:
                     addBook(inputs, bookCounter, library);
                     bookCounter++;
                     break;
 
-                case "R":
+                case Consts.REMOVE:
                     removeBook(inputs, library);
                     break;
 
-                case "O":
+                case Consts.CHECKOUT:
                     checkOutBook(inputs, library);
                     break;
 
-                case "I":
+                case Consts.RETURN:
                     returnBook(inputs, library);
                     break;
 
-                case "PA":
+                case Consts.PRINTALL:
                     if (library.isEmpty())
-                        print("Library catalog is empty!");
+                        print(Consts.ISEMPTY);
                     else
                         library.print();
                     break;
 
-                case "PD":
+                case Consts.PRINTDATE:
                     if (library.isEmpty())
-                        print("Library catalog is empty!");
+                        print(Consts.ISEMPTY);
                     else
                         library.printByDate();
                     break;
 
-                case "PN":
+                case Consts.PRINTNUM:
                     if (library.isEmpty())
-                        print("Library catalog is empty!");
+                        print(Consts.ISEMPTY);
                     else
                         library.printByNumber();
                     break;
 
                 default: //invalid input
-                    print("Invalid command!");
+                    print(Consts.INVALID);
                     break;
             }
         }
-
-        print("Kiosk session ended.");
+        print(Consts.SHUTDOWN);
     }
 
     /**
@@ -111,7 +109,7 @@ public class Kiosk
                 print("Invalid Date!");
         }
         else
-            print("Invalid command!");
+            print(Consts.INVALID);
     }
 
     /**
@@ -135,7 +133,7 @@ public class Kiosk
                         "does not have this book.");
         }
         else
-            print("Invalid command!");
+            print(Consts.INVALID);
     }
 
     /**
@@ -159,7 +157,7 @@ public class Kiosk
                 print("Book#" + number + " is not available.");
         }
         else
-            print("Invalid command!");
+            print(Consts.INVALID);
     }
 
     /**
@@ -183,7 +181,7 @@ public class Kiosk
                 print("Unable to return Book#" + number + ".");
         }
         else
-            print("Invalid command!");
+            print(Consts.INVALID);
     }
 
     /**

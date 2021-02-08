@@ -12,15 +12,12 @@ public class Library
     private Book[] books;
     private int numBooks;
 
-    //static constants
-    private static final int DEFAULT = 1;
-
     /**
      * Default constructor.
      */
     public Library()
     {
-        books = new Book[1];
+        books = new Book[Consts.DEFAULT];
         numBooks = 0;
     }
 
@@ -173,16 +170,20 @@ public class Library
         //insertion sort, shift larger elements to the right as needed
         for (int i = 1; i < numBooks; i++)
         {
-            Book key = books[i];
             int j = i - 1;
-
-            while (j >= 0 && (books[j].getDatePublished()
-                    .compareTo(key.getDatePublished()) > 0))
+            if (books[i] != null && books[j] != null)
             {
-                books[j+1] = books[j];
-                j = j - 1;
+                Book key = books[i];
+
+                while (j >= 0 && books[j] != null
+                        && (books[j].getDatePublished()
+                        .compareTo(key.getDatePublished()) > 0))
+                {
+                    books[j + 1] = books[j];
+                    j = j - 1;
+                }
+                books[j + 1] = key;
             }
-            books[j+1] = key;
         }
     }
 
@@ -213,17 +214,20 @@ public class Library
     {
         for (int i = 1; i < numBooks; i++)
         {
-            Book key = books[i];
             int j = i - 1;
-
-            while (j >= 0
-                    && Integer.parseInt(books[j].getNumber())
-                    > Integer.parseInt(key.getNumber()))
+            if (books[i] != null && books[j] != null)
             {
-                books[j+1] = books[j];
-                j = j - 1;
+                Book key = books[i];
+
+                while (j >= 0 && books[j] != null
+                        && (Integer.parseInt(books[j].getNumber()) >
+                        Integer.parseInt(key.getNumber())))
+                {
+                    books[j + 1] = books[j];
+                    j = j - 1;
+                }
+                books[j + 1] = key;
             }
-            books[j+1] = key;
         }
     }
 }

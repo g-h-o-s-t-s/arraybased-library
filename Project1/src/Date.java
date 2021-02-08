@@ -16,16 +16,6 @@ public class Date implements Comparable<Date>
     private int day;
     private int year;
 
-    //static constants
-    private static final int QUADRENNIAL = 4;
-    private static final int CENTURY = 100;
-    private static final int QUARTERCENTENNIAL = 400;
-    private static final int YEARMIN = 1900;
-    private static final int ALTMAXDAYS = 30;
-    private static final int FEBDAYSLEAP = 29;
-    private static final int FEBDAYS = 28;
-    private static final int DEFAULTMAXDAYS = 31;
-
     /**
      * Parameterized constructor.
      * Splits passed string and updates Date fields accordingly.
@@ -67,13 +57,13 @@ public class Date implements Comparable<Date>
     {
         //four base-cases: month/day/year out of bounds,
         //or the date is in the future
-        if (this.year < YEARMIN)
+        if (this.year < Consts.YEARMIN)
             return false;
 
         if (this.month <= 0 || this.month > Calendar.DECEMBER + 1)
             return false;
 
-        if (this.day <= 0 || this.day > DEFAULTMAXDAYS)
+        if (this.day <= 0 || this.day > Consts.DEFAULTMAXDAYS)
             return false;
 
         if (isInFuture(this.month, this.day, this.year))
@@ -115,11 +105,11 @@ public class Date implements Comparable<Date>
     private boolean isLeap()
     {
         boolean result = false;
-        if (year % QUADRENNIAL == 0)
+        if (year % Consts.QUADRENNIAL == 0)
         {
-            if (year % CENTURY == 0)
+            if (year % Consts.CENTURY == 0)
             {
-                if (year % QUARTERCENTENNIAL == 0)
+                if (year % Consts.QUARTERCENTENNIAL == 0)
                     result = true;
                 //else false
             }
@@ -147,18 +137,18 @@ public class Date implements Comparable<Date>
             case (Calendar.JUNE + 1):
             case (Calendar.SEPTEMBER + 1):
             case (Calendar.NOVEMBER + 1):
-                if (this.day > ALTMAXDAYS) //months with 30 days
+                if (this.day > Consts.ALTMAXDAYS) //months with 30 days
                     return false;
                 break;
 
             case (Calendar.FEBRUARY + 1):
-                if ((isLeapYear && this.day > FEBDAYSLEAP) //>29
-                        || (!isLeapYear && this.day > FEBDAYS)) //>28
+                if ((isLeapYear && this.day > Consts.FEBDAYSLEAP) //>29
+                        || (!isLeapYear && this.day > Consts.FEBDAYS)) //>28
                     return false;
                 break;
 
             default: //months with 31 days
-                if (this.day > DEFAULTMAXDAYS)
+                if (this.day > Consts.DEFAULTMAXDAYS)
                     return false;
                 break;
         }

@@ -10,11 +10,6 @@ import java.util.Scanner;
 @SuppressWarnings("WeakerAccess")
 public class Kiosk
 {
-    //static constants
-    private static final int SERIAL = 10001;
-    private static final int THREEINPUTS = 3;
-    private static final int TWOINPUTS = 2;
-
     /**
      * Driver method to run Kiosk commands.
      */
@@ -45,79 +40,20 @@ public class Kiosk
             switch (command)
             {
                 case "A":
-                    if (inputs.length == THREEINPUTS)
-                    {
-                        String title = inputs[1];
-                        String date = inputs[2];
-
-                        Date check = new Date(date);
-                        if (check.isValid())
-                        {
-                            Book addThis = new Book(bookCounter + SERIAL,
-                                    title, date);
-                            library.add(addThis);
-                            print(title + " added to the Library.");
-                            bookCounter++;
-                        }
-                        else
-                            print("Invalid Date!");
-                    }
-                    else
-                        print("Invalid command!");
+                    addBook(inputs, bookCounter, library);
+                    bookCounter++;
                     break;
 
                 case "R":
-                    if (inputs.length == TWOINPUTS)
-                    {
-                        int number = Integer.parseInt(inputs[1]);
-                        Book key = new Book(number);
-
-                        boolean removed = library.remove(key);
-
-                        if (removed)
-                            print("Book# " + number + " removed.");
-                        else
-                            print("Unable to remove, the library " +
-                                    "does not have this book.");
-                    }
-                    else
-                        print("Invalid command!");
+                    removeBook(inputs, library);
                     break;
 
                 case "O":
-                    if (inputs.length == TWOINPUTS)
-                    {
-                        int number = Integer.parseInt(inputs[1]);
-                        Book key = new Book(number);
-
-                        boolean checkedOut = library.checkOut(key);
-
-                        if (checkedOut)
-                            print("You've checked out Book#" + number
-                                    + ". Enjoy!");
-                        else
-                            print("Book#" + number + " is not available.");
-                    }
-                    else
-                        print("Invalid command!");
+                    checkOutBook(inputs, library);
                     break;
 
                 case "I":
-                    if (inputs.length == TWOINPUTS)
-                    {
-                        int number = Integer.parseInt(inputs[1]);
-                        Book key = new Book(number);
-
-                        boolean returned = library.returns(key);
-
-                        if (returned)
-                            print("Book#" + number
-                                    + " return has completed. Thanks!");
-                        else
-                            print("Unable to return Book#" + number + ".");
-                    }
-                    else
-                        print("Invalid command!");
+                    returnBook(inputs, library);
                     break;
 
                 case "PA":
@@ -148,6 +84,106 @@ public class Kiosk
         }
 
         print("Kiosk session ended.");
+    }
+
+    /**
+     * Helper method to execute "Add" client command.
+     * @param inputs String[] reference pass of return value of split()
+     * @param bookCounter int, tracks how many Books have been instantiated
+     * @param library Library, reference pass of library bag container
+     */
+    private void addBook(String[] inputs, int bookCounter, Library library)
+    {
+        if (inputs.length == Consts.THREEINPUTS)
+        {
+            String title = inputs[1];
+            String date = inputs[2];
+
+            Date check = new Date(date);
+            if (check.isValid())
+            {
+                Book addThis = new Book(bookCounter
+                        + Consts.SERIAL, title, date);
+                library.add(addThis);
+                print(title + " added to the Library.");
+            }
+            else
+                print("Invalid Date!");
+        }
+        else
+            print("Invalid command!");
+    }
+
+    /**
+     * Helper method to execute "Remove" client command.
+     * @param inputs String[] reference pass of return value of split()
+     * @param library Library, reference pass of library bag container
+     */
+    private void removeBook(String[] inputs, Library library)
+    {
+        if (inputs.length == Consts.TWOINPUTS)
+        {
+            int number = Integer.parseInt(inputs[1]);
+            Book key = new Book(number);
+
+            boolean removed = library.remove(key);
+
+            if (removed)
+                print("Book# " + number + " removed.");
+            else
+                print("Unable to remove, the library " +
+                        "does not have this book.");
+        }
+        else
+            print("Invalid command!");
+    }
+
+    /**
+     * Helper method to execute "CheckOut" client command.
+     * @param inputs String[] reference pass of return value of split()
+     * @param library Library, reference pass of library bag container
+     */
+    private void checkOutBook(String[] inputs, Library library)
+    {
+        if (inputs.length == Consts.TWOINPUTS)
+        {
+            int number = Integer.parseInt(inputs[1]);
+            Book key = new Book(number);
+
+            boolean checkedOut = library.checkOut(key);
+
+            if (checkedOut)
+                print("You've checked out Book#" + number
+                        + ". Enjoy!");
+            else
+                print("Book#" + number + " is not available.");
+        }
+        else
+            print("Invalid command!");
+    }
+
+    /**
+     * Helper method to execute "Return" client command.
+     * @param inputs String[] reference pass of return value of split()
+     * @param library Library, reference pass of library bag container
+     */
+    private void returnBook(String[] inputs, Library library)
+    {
+        if (inputs.length == Consts.TWOINPUTS)
+        {
+            int number = Integer.parseInt(inputs[1]);
+            Book key = new Book(number);
+
+            boolean returned = library.returns(key);
+
+            if (returned)
+                print("Book#" + number
+                        + " return has completed. Thanks!");
+            else
+                print("Unable to return Book#" + number + ".");
+        }
+        else
+            print("Invalid command!");
     }
 
     /**

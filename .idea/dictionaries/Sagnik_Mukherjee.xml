@@ -2,10 +2,13 @@
   <dictionary name="Sagnik Mukherjee">
     <words>
       <w>altmaxdays</w>
+      <w>consts</w>
       <w>defaultmaxdays</w>
       <w>febdays</w>
       <w>febdaysleap</w>
       <w>quartercentennial</w>
+      <w>threeinputs</w>
+      <w>twoinputs</w>
       <w>yearmin</w>
     </words>
   </dictionary>

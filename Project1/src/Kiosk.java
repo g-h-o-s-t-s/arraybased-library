@@ -15,7 +15,7 @@ public class Kiosk
      */
     public void run()
     {
-        print(Consts.STARTUP);
+        printout(Consts.STARTUP);
         Library library = new Library();
         Scanner scn = new Scanner(System.in);
         String input;
@@ -33,9 +33,7 @@ public class Kiosk
             }
 
             inputs = input.split(Consts.DELIMITER);
-            String command = inputs[0];
-            //TO-DO: commands are not thorough and throw various exceptions,
-            // so far only adding works as intended
+            String command = inputs[Consts.SPLITONE];
             switch (command)
             {
                 case Consts.ADD:
@@ -57,31 +55,31 @@ public class Kiosk
 
                 case Consts.PRINTALL:
                     if (library.isEmpty())
-                        print(Consts.ISEMPTY);
+                        printout(Consts.ISEMPTY);
                     else
                         library.print();
                     break;
 
                 case Consts.PRINTDATE:
                     if (library.isEmpty())
-                        print(Consts.ISEMPTY);
+                        printout(Consts.ISEMPTY);
                     else
                         library.printByDate();
                     break;
 
                 case Consts.PRINTNUM:
                     if (library.isEmpty())
-                        print(Consts.ISEMPTY);
+                        printout(Consts.ISEMPTY);
                     else
                         library.printByNumber();
                     break;
 
                 default: //invalid input
-                    print(Consts.INVALID);
+                    printout(Consts.INVALID);
                     break;
             }
         }
-        print(Consts.SHUTDOWN);
+        printout(Consts.SHUTDOWN);
     }
 
     /**
@@ -94,8 +92,8 @@ public class Kiosk
     {
         if (inputs.length == Consts.THREEINPUTS)
         {
-            String title = inputs[1];
-            String date = inputs[2];
+            String title = inputs[Consts.SPLITTWO];
+            String date = inputs[Consts.SPLITTHREE];
 
             Date check = new Date(date);
             if (check.isValid())
@@ -103,13 +101,13 @@ public class Kiosk
                 Book addThis = new Book(bookCounter
                         + Consts.SERIAL, title, date);
                 library.add(addThis);
-                print(title + " added to the Library.");
+                printout(title + " added to the Library.");
             }
             else
-                print("Invalid Date!");
+                printout("Invalid Date!");
         }
         else
-            print(Consts.INVALID);
+            printout(Consts.INVALID);
     }
 
     /**
@@ -121,19 +119,24 @@ public class Kiosk
     {
         if (inputs.length == Consts.TWOINPUTS)
         {
-            int number = Integer.parseInt(inputs[1]);
-            Book key = new Book(number);
+            try {
+                int number = Integer.parseInt(inputs[Consts.SPLITTWO]);
+                Book key = new Book(number);
 
-            boolean removed = library.remove(key);
+                boolean removed = library.remove(key);
 
-            if (removed)
-                print("Book# " + number + " removed.");
-            else
-                print("Unable to remove, the library " +
-                        "does not have this book.");
+                if (removed)
+                    printout("Book# " + number + " removed.");
+                else
+                    printout("Unable to remove, the library " +
+                            "does not have this book.");
+            } catch (NumberFormatException ex)
+            {
+                printout(Consts.INVALID);
+            }
         }
         else
-            print(Consts.INVALID);
+            printout(Consts.INVALID);
     }
 
     /**
@@ -145,19 +148,25 @@ public class Kiosk
     {
         if (inputs.length == Consts.TWOINPUTS)
         {
-            int number = Integer.parseInt(inputs[1]);
-            Book key = new Book(number);
+            try
+            {
+                int number = Integer.parseInt(inputs[Consts.SPLITTWO]);
+                Book key = new Book(number);
 
-            boolean checkedOut = library.checkOut(key);
+                boolean checkedOut = library.checkOut(key);
 
-            if (checkedOut)
-                print("You've checked out Book#" + number
-                        + ". Enjoy!");
-            else
-                print("Book#" + number + " is not available.");
+                if (checkedOut)
+                    printout("You've checked out Book#" + number
+                            + ". Enjoy!");
+                else
+                    printout("Book#" + number + " is not available.");
+            } catch (NumberFormatException ex)
+            {
+                printout(Consts.INVALID);
+            }
         }
         else
-            print(Consts.INVALID);
+            printout(Consts.INVALID);
     }
 
     /**
@@ -169,19 +178,25 @@ public class Kiosk
     {
         if (inputs.length == Consts.TWOINPUTS)
         {
-            int number = Integer.parseInt(inputs[1]);
-            Book key = new Book(number);
+            try
+            {
+                int number = Integer.parseInt(inputs[Consts.SPLITTWO]);
+                Book key = new Book(number);
 
-            boolean returned = library.returns(key);
+                boolean returned = library.returns(key);
 
-            if (returned)
-                print("Book#" + number
-                        + " return has completed. Thanks!");
-            else
-                print("Unable to return Book#" + number + ".");
+                if (returned)
+                    printout("Book#" + number
+                            + " return has completed. Thanks!");
+                else
+                    printout("Unable to return Book#" + number + ".");
+            } catch (NumberFormatException ex)
+            {
+                printout(Consts.INVALID);
+            }
         }
         else
-            print(Consts.INVALID);
+            printout(Consts.INVALID);
     }
 
     /**
@@ -189,7 +204,7 @@ public class Kiosk
      * Reduces the repetitions of "System.out.println" in Kiosk.
      * @param str String literal to be printed
      */
-    private void print(String str)
+    private void printout(String str)
     {
         System.out.println(str);
     }

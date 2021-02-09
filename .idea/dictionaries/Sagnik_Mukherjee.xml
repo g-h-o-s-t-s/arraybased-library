@@ -6,11 +6,18 @@
       <w>defaultmaxdays</w>
       <w>febdays</w>
       <w>febdaysleap</w>
+      <w>inone</w>
+      <w>inthree</w>
+      <w>intwo</w>
       <w>isempty</w>
+      <w>listheader</w>
       <w>printall</w>
       <w>printdate</w>
       <w>printnum</w>
       <w>quartercentennial</w>
+      <w>splitone</w>
+      <w>splitthree</w>
+      <w>splittwo</w>
       <w>threeinputs</w>
       <w>twoinputs</w>
       <w>yearmin</w>

@@ -23,6 +23,12 @@ public class Consts
     /* Library() class constants */
     //Used to determine size of Library.books[] in constructor
     public static final int DEFAULT = 1;
+    //Used to grow books[] if bag is full of objects
+    public static final int GROW = 4;
+    //Miscellaneous string literal values.
+    public static final String LISTHEADER = "**List of books ";
+    public static final String LISTFOOTER = "**End of list";
+
 
     /* Kiosk() class constants */
     //Default serial number, added to the nth-instance of Book().
@@ -33,6 +39,9 @@ public class Consts
     //"R", "O", and "I" would have two substrings for their input lines.
     public static final int THREEINPUTS = 3;
     public static final int TWOINPUTS = 2;
+    public static final int SPLITONE = 0;
+    public static final int SPLITTWO = 1;
+    public static final int SPLITTHREE = 2;
     //Output messages/String literal constant values used in Kiosk.
     public static final String STARTUP = "Library Kiosk running.";
     public static final String QUIT = "Q";
@@ -47,7 +56,6 @@ public class Consts
     public static final String PRINTNUM = "PN";
     public static final String INVALID = "Invalid command!";
     public static final String SHUTDOWN = "Kiosk session ended.";
-
 
     /**
      * Constructor prevents other classes from instantiating objects of

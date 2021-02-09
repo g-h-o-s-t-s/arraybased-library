@@ -34,13 +34,13 @@ public class Library
      * Helper method for remove(), finds index of book to be removed.
      * If book is not within Library.books[], return -1.
      * @param book Book to be found within books[], using serial number
-     * @return int serial number of book if found, -1 otherwise
+     * @return index of book if found, -1 otherwise
      */
     private int find(Book book)
     {
-        for (Book curr:books)
-            if ((curr != null) && curr.equals(book))
-                return Integer.parseInt(curr.getNumber());
+        for (int i = 0; i < books.length; i++)
+            if ((books[i] != null) && books[i].equals(book))
+                return i;
 
         return -1;
     }
@@ -50,8 +50,8 @@ public class Library
      */
     private void grow()
     {
-        Book[] temp = new Book[books.length + 4];
-        for (int i = 0; i < numBooks; i++)
+        Book[] temp = new Book[books.length + Consts.GROW];
+        for (int i = 0; i < books.length; i++)
             temp[i] = books[i];
 
         books = temp;
@@ -63,15 +63,18 @@ public class Library
      */
     public void add(Book book)
     {
-        if (numBooks < books.length && book != null)
-        {
-            books[numBooks] = book;
-            numBooks++;
-        }
-
         //bag is full, need to call grow()
         if (numBooks >= books.length)
             grow();
+
+        for (int i = 0; i < books.length; i++)
+            if (books[i] == null)
+            {
+                books[i] = book;
+                break;
+            }
+
+        numBooks++;
     }
 
     /**
@@ -90,10 +93,9 @@ public class Library
         Book[] temp = new Book[books.length - 1];
 
         //add all Books besides the removed Book object to temp
-        for (int i = 0; i < numBooks; i++)
+        for (int i = 0; i < books.length; i++)
         {
-            if ((books[i] != null) &&
-                    !(Integer.parseInt(books[i].getNumber()) == removeThis))
+            if ((books[i] != null) && i != removeThis)
                 temp[i] = books[i];
         }
 
@@ -114,7 +116,7 @@ public class Library
             return false;
 
         //attempt to check out book
-        return book.tryCheckOut();
+        return books[found].tryCheckOut();
     }
 
     /**
@@ -129,7 +131,7 @@ public class Library
             return false;
 
         //attempt to return book
-        return book.tryReturns();
+        return books[found].tryReturns();
     }
 
     /**
@@ -137,9 +139,12 @@ public class Library
      */
     public void print()
     {
+        System.out.println(Consts.LISTHEADER + "in the library.");
         for (Book book:books)
             if (book != null)
                 System.out.println(book.toString());
+
+        System.out.println(Consts.LISTFOOTER);
     }
 
     /**
@@ -147,9 +152,10 @@ public class Library
      */
     public void printByDate()
     {
+        System.out.println(Consts.LISTHEADER + "by the dates published.");
         //using temp array, order of original books[] is preserved
         Book[] temp = new Book[books.length];
-        for (int i = 0; i < numBooks; i++)
+        for (int i = 0; i < books.length; i++)
             temp[i] = books[i];
 
         sortByDate(temp);
@@ -157,6 +163,8 @@ public class Library
         for (Book book:temp)
             if (book != null)
                 System.out.println(book.toString());
+
+        System.out.println(Consts.LISTFOOTER);
     }
 
     /**
@@ -168,7 +176,7 @@ public class Library
     private void sortByDate(Book[] books)
     {
         //insertion sort, shift larger elements to the right as needed
-        for (int i = 1; i < numBooks; i++)
+        for (int i = 1; i < books.length; i++)
         {
             int j = i - 1;
             if (books[i] != null && books[j] != null)
@@ -192,9 +200,10 @@ public class Library
      */
     public void printByNumber()
     {
+        System.out.println(Consts.LISTHEADER + "by the book numbers.");
         //using temp array, order of original books[] is preserved
         Book[] temp = new Book[books.length];
-        for (int i = 0; i < numBooks; i++)
+        for (int i = 0; i < books.length; i++)
             temp[i] = books[i];
 
         sortByNumber(temp);
@@ -202,6 +211,8 @@ public class Library
         for (Book book:temp)
             if (book != null)
                 System.out.println(book.toString());
+
+        System.out.println(Consts.LISTFOOTER);
     }
 
     /**
@@ -212,7 +223,7 @@ public class Library
      */
     private void sortByNumber(Book[] books)
     {
-        for (int i = 1; i < numBooks; i++)
+        for (int i = 1; i < books.length; i++)
         {
             int j = i - 1;
             if (books[i] != null && books[j] != null)

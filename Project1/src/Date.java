@@ -1,5 +1,4 @@
 import java.util.Calendar;
-
 /**
  * The Date class contains fields/methods for an object of type Date.
  * Three fields make up the month, day, and year of a Date.

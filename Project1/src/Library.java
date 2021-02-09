@@ -90,16 +90,20 @@ public class Library
         if (removeThis == -1)
             return false;
 
-        Book[] temp = new Book[books.length - 1];
+        books[removeThis] = null;
 
-        //add all Books besides the removed Book object to temp
-        for (int i = 0; i < books.length; i++)
+        //shift successive elements to the right
+        for (int i = removeThis + 1; i < books.length; i++)
         {
-            if ((books[i] != null) && i != removeThis)
-                temp[i] = books[i];
+            int last = i - 1;
+            try
+            {
+                books[last] = books[i];
+            } catch (ArrayIndexOutOfBoundsException ex)
+            {
+                break;
+            }
         }
-
-        books = temp;
         numBooks--;
         return true;
     }
@@ -139,12 +143,9 @@ public class Library
      */
     public void print()
     {
-        System.out.println(Consts.LISTHEADER + "in the library.");
         for (Book book:books)
             if (book != null)
                 System.out.println(book.toString());
-
-        System.out.println(Consts.LISTFOOTER);
     }
 
     /**
@@ -152,19 +153,8 @@ public class Library
      */
     public void printByDate()
     {
-        System.out.println(Consts.LISTHEADER + "by the dates published.");
-        //using temp array, order of original books[] is preserved
-        Book[] temp = new Book[books.length];
-        for (int i = 0; i < books.length; i++)
-            temp[i] = books[i];
-
-        sortByDate(temp);
-
-        for (Book book:temp)
-            if (book != null)
-                System.out.println(book.toString());
-
-        System.out.println(Consts.LISTFOOTER);
+        sortByDate(books);
+        print();
     }
 
     /**
@@ -200,19 +190,8 @@ public class Library
      */
     public void printByNumber()
     {
-        System.out.println(Consts.LISTHEADER + "by the book numbers.");
-        //using temp array, order of original books[] is preserved
-        Book[] temp = new Book[books.length];
-        for (int i = 0; i < books.length; i++)
-            temp[i] = books[i];
-
-        sortByNumber(temp);
-
-        for (Book book:temp)
-            if (book != null)
-                System.out.println(book.toString());
-
-        System.out.println(Consts.LISTFOOTER);
+        sortByNumber(books);
+        print();
     }
 
     /**
@@ -231,8 +210,7 @@ public class Library
                 Book key = books[i];
 
                 while (j >= 0 && books[j] != null
-                        && (Integer.parseInt(books[j].getNumber()) >
-                        Integer.parseInt(key.getNumber())))
+                        && books[j].compareTo(key) > 0)
                 {
                     books[j + 1] = books[j];
                     j = j - 1;

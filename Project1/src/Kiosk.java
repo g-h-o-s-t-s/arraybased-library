@@ -1,5 +1,4 @@
 import java.util.Scanner;
-
 /**
  * The Kiosk class acts as the Client class for this project.
  * Using built-in Scanner class methods, the Kiosk will interact
@@ -26,6 +25,9 @@ public class Kiosk
         while (loop && scn.hasNextLine())
         {
             input = scn.nextLine();
+            if (input.equals(""))
+                continue;
+
             if (input.equals(Consts.QUIT))
             {
                 loop = false;
@@ -57,21 +59,36 @@ public class Kiosk
                     if (library.isEmpty())
                         printout(Consts.ISEMPTY);
                     else
+                    {
+                        System.out.println(Consts.LISTHEADER
+                                + "in the library.");
                         library.print();
+                        System.out.println(Consts.LISTFOOTER);
+                    }
                     break;
 
                 case Consts.PRINTDATE:
                     if (library.isEmpty())
                         printout(Consts.ISEMPTY);
                     else
+                    {
+                        System.out.println(Consts.LISTHEADER
+                                + "by the dates published.");
                         library.printByDate();
+                        System.out.println(Consts.LISTFOOTER);
+                    }
                     break;
 
                 case Consts.PRINTNUM:
                     if (library.isEmpty())
                         printout(Consts.ISEMPTY);
                     else
+                    {
+                        System.out.println(Consts.LISTHEADER
+                                + "by the book numbers.");
                         library.printByNumber();
+                        System.out.println(Consts.LISTFOOTER);
+                    }
                     break;
 
                 default: //invalid input
@@ -101,7 +118,7 @@ public class Kiosk
                 Book addThis = new Book(bookCounter
                         + Consts.SERIAL, title, date);
                 library.add(addThis);
-                printout(title + " added to the Library.");
+                printout(title + " added to the library.");
             }
             else
                 printout("Invalid Date!");

@@ -5,7 +5,7 @@
  * a String literal describing their data field contents.
  @author Michael Choe, Sagnik Mukherjee
  */
-@SuppressWarnings("WeakerAccess")
+@SuppressWarnings({"WeakerAccess", "unused"})
 public class Book implements Comparable<Book>
 {
     //object fields
@@ -53,11 +53,11 @@ public class Book implements Comparable<Book>
 
     /**
      * Getter, returns number field for this Book.
-     * @return String literal containing this.book.number value
+     * @return int containing this.number value
      */
-    public String getNumber()
+    public int getNumber()
     {
-        return number;
+        return Integer.parseInt(number);
     }
 
     /**
@@ -119,16 +119,28 @@ public class Book implements Comparable<Book>
     }
 
     /**
-     * Compare passed Book.number (that) with invoking Book.number (this).
+     * Compare two Book objects, first by number, then name, then date
      * @param that Book to be compared to by invoking object
      * @return -1 if this is less, 1 if this is greater, 0 if equal
      */
     public int compareTo(Book that)
     {
-        int thisNumber = Integer.parseInt(this.number);
-        int thatNumber = Integer.parseInt(that.getNumber());
+        int thisNumber = this.getNumber();
+        int thatNumber = that.getNumber();
 
-        return Integer.compare(thisNumber, thatNumber);
+        int numComparison = Integer.compare(thisNumber, thatNumber);
+
+        //same serial number, compare book titles
+        if (numComparison == 0)
+        {
+            int nameComparison = this.name.compareTo(that.name);
+            //same title, compare publication dates
+            if (nameComparison == 0)
+                return this.datePublished.compareTo(that.datePublished);
+        }
+
+        //different serial numbers
+        return numComparison;
     }
 
     /**
@@ -141,7 +153,7 @@ public class Book implements Comparable<Book>
     {
         if (checkedOut)
             return "Book#" + number + "::" + name + "::" + datePublished
-                    + "::is not available.";
+                    + "::is checked out.";
         else
             return "Book#" + number + "::" + name + "::" + datePublished
                 + "::is available.";

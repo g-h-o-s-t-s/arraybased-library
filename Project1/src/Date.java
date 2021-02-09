@@ -24,9 +24,18 @@ public class Date implements Comparable<Date>
     public Date(String date) //taking mm/dd/yyyy and create a Date object
     {
         String[] fields = date.split("/");
-        month = Integer.parseInt(fields[0]);
-        day = Integer.parseInt(fields[1]);
-        year = Integer.parseInt(fields[2]);
+        try
+        {
+            month = Integer.parseInt(fields[0]);
+            day = Integer.parseInt(fields[1]);
+            year = Integer.parseInt(fields[2]);
+        } catch (NumberFormatException ex)
+        {
+            //for inputs such as "3/ /2013" intentionally return invalid Date
+            month = Consts.SERIAL;
+            day = Consts.SERIAL;
+            year = Consts.SERIAL;
+        }
     }
 
     /**
@@ -204,56 +213,56 @@ public class Date implements Comparable<Date>
                 rightNow.get(Calendar.DAY_OF_MONTH),
                 rightNow.get(Calendar.YEAR));
         Date date1 = new Date(str1);
-        System.out.println("Now testing \"" + date1.toString() + "\".");
+        System.out.println("Now testing \"" + str1 + "\".");
         boolean test1 = date1.isValid();
         System.out.println("Test 1 returned " + test1 + ".");
 
         //Test 2 - Is 1/1/1900 Valid? (expected true)
         String str2 = "1/1/1900";
         Date date2 = new Date(str2);
-        System.out.println("Now testing \"" + date2.toString() + "\".");
+        System.out.println("Now testing \"" + str2 + "\".");
         boolean test2 = date2.isValid();
         System.out.println("Test 2 returned " + test2 + ".");
 
         //Test 3 - Is 1/31/1979 Valid? (expected true)
         String str3 = "1/31/1979";
         Date date3 = new Date(str3);
-        System.out.println("Now testing \"" + date3.toString() + "\".");
+        System.out.println("Now testing \"" + str3 + "\".");
         boolean test3 = date3.isValid();
         System.out.println("Test 3 returned " + test3 + ".");
 
         //Test 4 - Is 02/28/1999 Valid? (expected true)
         String str4 = "02/28/1999";
         Date date4 = new Date(str4);
-        System.out.println("Now testing \"" + date4.toString() + "\".");
+        System.out.println("Now testing \"" + str4 + "\".");
         boolean test4 = date4.isValid();
         System.out.println("Test 4 returned " + test4 + ".");
 
         //Test 5 - Is 02/29/1999 Valid? (expected false)
         String str5 = "02/29/1999";
         Date date5 = new Date(str5);
-        System.out.println("Now testing \"" + date5.toString() + "\".");
+        System.out.println("Now testing \"" + str5 + "\".");
         boolean test5 = date5.isValid();
         System.out.println("Test 5 returned " + test5 + ".");
 
         //Test 6 - Is 02/29/2000 Valid? (expected true)
         String str6 = "02/29/2000";
         Date date6 = new Date(str6);
-        System.out.println("Now testing \"" + date6.toString() + "\".");
+        System.out.println("Now testing \"" + str6 + "\".");
         boolean test6 = date6.isValid();
         System.out.println("Test 6 returned " + test6 + ".");
 
         //Test 7 - Is 02/30/2000 Valid? (expected false)
         String str7 = "02/30/2000";
         Date date7 = new Date(str7);
-        System.out.println("Now testing \"" + date7.toString() + "\".");
+        System.out.println("Now testing \"" + str7 + "\".");
         boolean test7 = date7.isValid();
         System.out.println("Test 7 returned " + test7 + ".");
 
         //Test 8 - Is 09/31/2012 Valid? (expected false)
         String str8 = "09/31/2012";
         Date date8 = new Date(str8);
-        System.out.println("Now testing \"" + date8.toString() + "\".");
+        System.out.println("Now testing \"" + str8 + "\".");
         boolean test8 = date8.isValid();
         System.out.println("Test 8 returned " + test8 + ".");
 
@@ -263,7 +272,7 @@ public class Date implements Comparable<Date>
                 rightNow.get(Calendar.DAY_OF_MONTH) + 1,
                 rightNow.get(Calendar.YEAR));
         Date date9 = new Date(str9);
-        System.out.println("Now testing \"" + date9.toString() + "\".");
+        System.out.println("Now testing \"" + str9 + "\".");
         boolean test9 = date9.isValid();
         System.out.println("Test 9 returned " + test9 + ".");
 
@@ -273,7 +282,7 @@ public class Date implements Comparable<Date>
                 rightNow.get(Calendar.DAY_OF_MONTH),
                 rightNow.get(Calendar.YEAR) + 1);
         Date date10 = new Date(str10);
-        System.out.println("Now testing \"" + date10.toString() + "\".");
+        System.out.println("Now testing \"" + str10 + "\".");
         boolean test10 = date10.isValid();
         System.out.println("Test 10 returned " + test10 + ".");
     }

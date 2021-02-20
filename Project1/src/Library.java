@@ -42,7 +42,7 @@ public class Library
             if ((books[i] != null) && books[i].equals(book))
                 return i;
 
-        return -1;
+        return Consts.NOTFOUND;
     }
 
     /**
@@ -87,7 +87,7 @@ public class Library
     public boolean remove(Book book)
     {
         int removeThis = find(book);
-        if (removeThis == -1)
+        if (removeThis == Consts.NOTFOUND)
             return false;
 
         books[removeThis] = null;
@@ -116,7 +116,7 @@ public class Library
     public boolean checkOut(Book book)
     {
         int found = find(book);
-        if (found == -1)
+        if (found == Consts.NOTFOUND)
             return false;
 
         //attempt to check out book
@@ -131,7 +131,7 @@ public class Library
     public boolean returns(Book book)
     {
         int found = find(book);
-        if (found == -1)
+        if (found == Consts.NOTFOUND)
             return false;
 
         //attempt to return book

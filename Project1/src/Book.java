@@ -5,7 +5,7 @@
  * a String literal describing their data field contents.
  @author Michael Choe, Sagnik Mukherjee
  */
-@SuppressWarnings({"WeakerAccess", "unused"})
+@SuppressWarnings({"WeakerAccess", "unused", "FieldMayBeFinal"})
 public class Book implements Comparable<Book>
 {
     //object fields

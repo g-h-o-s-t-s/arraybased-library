@@ -200,7 +200,7 @@ public class Date implements Comparable<Date>
      * Instantiates Dates and checks their validity.
      * @param args The command line arguments.
      */
-    public static void main(String args[])
+    public static void main(String[] args)
     {
         System.out.println("TESTBED MAIN - DATE() CLASS" +
                 "\n---------------------------");

@@ -28,6 +28,8 @@ public class Consts
     //Miscellaneous string literal values.
     public static final String LISTHEADER = "**List of books ";
     public static final String LISTFOOTER = "**End of list";
+    //Object not found with find()(method failure).
+    public static final int NOTFOUND = -1;
 
 
     /* Kiosk() class constants */
